@@ -17,6 +17,11 @@ def get_model():
 def home():
     return render_template("index.html")
 
+# Health check route for Railway
+@app.route("/healthz")
+def healthz():
+    return "ok", 200
+
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.form
