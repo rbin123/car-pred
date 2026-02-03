@@ -1,158 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Selling Price Prediction</title>
-
   <style>
     * {
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
     }
-
     body {
       min-height: 100vh;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: #f7f7f7;
     }
-
     .card {
-      width: 420px;
-      background: #121010;
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    .card h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #1e0302;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #cdc5c5;
-    }
-
-    input,
-    select {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid #c32929;
-      font-size: 14px;
-      transition: border 0.3s, box-shadow 0.3s;
-    }
+      <style>
+        * {
+          box-sizing: border-box;
+          font-family: 'Inter', Arial, sans-serif;
+        }
+        body {
+          min-height: 100vh;
+          margin: 0;
+          background: #f7f7f7;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .card {
+          width: 100%;
+          max-width: 370px;
+          background: #fff;
+          border-radius: 10px;
+          padding: 32px 24px 24px 24px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+          border: 1px solid #ececec;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          margin: 0 auto;
+        }
+        .card h2 {
+          text-align: center;
+          margin-bottom: 24px;
+          color: #222;
+          font-size: 1.4rem;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+        }
+        form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+          align-items: stretch;
+        }
+        .form-group {
+          margin-bottom: 0;
+          display: flex;
+          flex-direction: column;
+        }
+        label {
+          display: block;
+          margin-bottom: 4px;
+          font-weight: 500;
+          color: #444;
+          font-size: 0.97em;
+        }
+        input,
+        select {
+          width: 100%;
+          padding: 8px 10px;
+          border-radius: 6px;
+          border: 1px solid #d3d3d3;
+          font-size: 15px;
+          background: #fafbfc;
+          color: #222;
+          transition: border 0.2s;
+        }
+        input:focus,
+        select:focus {
+          outline: none;
+          border-color: #a3bffa;
+          background: #fff;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-radius: 7px;
+          background: #222;
+          color: #fff;
+          font-size: 1em;
+          font-weight: 600;
+          cursor: pointer;
+          margin-top: 8px;
+          transition: background 0.2s;
+        }
+        button:hover {
+          background: #444;
+        }
+        .note {
+          margin-top: 10px;
+          font-size: 12px;
+          text-align: center;
+          color: #888;
+        }
+        .prediction {
+          text-align: center;
+          color: #2d7a46;
+          font-size: 1.1em;
+          margin-top: 18px;
+          font-weight: 500;
+        }
+      </style>
 
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #2a5298;
-      box-shadow: 0 0 0 2px rgba(42, 82, 152, 0.2);
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #ede4e4;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    .note {
-      margin-top: 14px;
-      font-size: 12px;
-      text-align: center;
-      color: #666;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="card">
-    <h2><center>Car Selling Price Prediction</center></h2>
-
-    <form action="/predict" method="post">
       <div class="form-group">
-        <label>Year</label>
-        <input type="number" name="year" placeholder="eg. 2010" required />
-      </div>
-
-      <div class="form-group">
-        <label>Showroom Price (lakhs)</label>
-        <input type="number" step="0.01" name="showroom_price" placeholder="eg. 10.45" required />
-      </div>
-
-      <div class="form-group">
-        <label>Kilometers Driven</label>
-        <input type="number" name="kms_driven" placeholder="eg. 10000" required />
-      </div>
-
-      <div class="form-group">
-        <label>Previous Owners</label>
-        <input type="number" name="owners" placeholder="0 / 1 / 2" required />
-      </div>
-
-      <div class="form-group">
-        <label>Fuel Type</label>
-        <select name="fuel">
-          <option value="Petrol">Petrol</option>
-          <option value="Diesel">Diesel</option>
-          <option value="CNG">CNG</option>
-          <option value="EV">Ev</option>
-          <option value="Highbrid">Highbrid</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Dealer or Individual</label>
-        <select name="seller_type">
-          <option value="Dealer">Dealer</option>
-          <option value="Individual">Individual</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Transmission Type</label>
-        <select name="transmission">
-          <option value="Manual">Manual Car</option>
-          <option value="Automatic">Automatic Car</option>
-        </select>
-      </div>
-
-      <button type="submit">Check Selling Price</button>
-    </form>
-
-    <div class="note">Enter correct details to get accurate prediction</div>
-  </div>
-  <div>
-  {% if prediction_text %}
-  <h3 style="text-align:center; color:rgb(164, 174, 164); margin-top:15px;">
-    {{ prediction_text }}
-  </h3>
-  {% endif %}
-  </div>
-</body>
-</html>
+        <div class="card">
+          <h2>Car Selling Price Prediction</h2>
+          <form action="/predict" method="post">
+            <div class="form-group">
+              <label>Year</label>
+              <input type="number" name="year" placeholder="eg. 2010" required />
+            </div>
+            <div class="form-group">
+              <label>Showroom Price (lakhs)</label>
+              <input type="number" step="0.01" name="showroom_price" placeholder="eg. 10.45" required />
+            </div>
+            <div class="form-group">
+              <label>Kilometers Driven</label>
+              <input type="number" name="kms_driven" placeholder="eg. 10000" required />
+            </div>
+            <div class="form-group">
+              <label>Previous Owners</label>
+              <input type="number" name="owners" placeholder="0 / 1 / 2" required />
+            </div>
+            <div class="form-group">
+              <label>Fuel Type</label>
+              <select name="fuel">
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
+                <option value="EV">Ev</option>
+                <option value="Highbrid">Highbrid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Dealer or Individual</label>
+              <select name="seller_type">
+                <option value="Dealer">Dealer</option>
+                <option value="Individual">Individual</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Transmission Type</label>
+              <select name="transmission">
+                <option value="Manual">Manual Car</option>
+                <option value="Automatic">Automatic Car</option>
+              </select>
+            </div>
+            <button type="submit">Check Selling Price</button>
+          </form>
+          <div class="note">Enter correct details to get accurate prediction</div>
+          {% if prediction_text %}
+            <div class="prediction">
+              {{ prediction_text }}
+            </div>
+          {% endif %}
+        </div>
